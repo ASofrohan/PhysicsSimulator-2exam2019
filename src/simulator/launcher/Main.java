@@ -35,6 +35,7 @@ import simulator.factories.NewtonUniversalGravitationBuilder;
 import simulator.factories.NoForceBuilder;
 import simulator.model.Atrapado;
 import simulator.model.Body;
+import simulator.model.CambioSigno;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 import simulator.view.MainWindow;
@@ -52,6 +53,7 @@ public class Main {
 
 	// some attributes to stores values corresponding to command-line parameters
 	//
+	private static Integer _axe = null;
 	private static String mode = "batch";
 	private static Double _dtime = null;
 	private static String _inFile = null;
@@ -60,7 +62,7 @@ public class Main {
 	private static int _steps = 0;
 	private static JSONObject _forceLawsInfo = null;
 	private static JSONObject _stateComparatorInfo = null;
-
+	private static CambioSigno cs;
 	// factories
 	private static Factory<Body> _bodyFactory = null;
 	private static Factory<ForceLaws> _forceLawsFactory = null;
@@ -103,7 +105,7 @@ public class Main {
 			parseStepsOption(line);
 			parseOutputOption(line);
 			parseExpectedOutputOption(line);
-			
+			parseAxeiOption(line);
 			parseDeltaTimeOption(line);
 			parseForceLawsOption(line);
 			parseStateComparatorOption(line);
@@ -158,6 +160,13 @@ public class Main {
 						+ _dtimeDefaultValue + ".")
 				.build());
 
+		//axe
+		cmdLineOptions.addOption(Option.builder("axe").longOpt("axe").hasArg()
+				.desc("An integer representing the axe of\n"
+						+ "simulation changing from negative to positive.")
+				.build());
+		
+		
 		// force laws
 		cmdLineOptions.addOption(Option.builder("fl").longOpt("force-laws").hasArg()
 				.desc("Force laws to be used in the simulator. Possible values: "
@@ -218,6 +227,16 @@ public class Main {
 		_expFile = line.getOptionValue("eo"); 
 	}
 	
+	private static void parseAxeiOption(CommandLine line) throws ParseException{
+		String axe = line.getOptionValue("axe", _dtimeDefaultValue.toString());
+		try {
+			_axe = Integer.parseInt(axe);
+			assert (_axe >= 0 && _axe < 2);
+		}catch(Exception e) {
+			throw new ParseException("Invalid axe value: " + axe);
+		}
+	}
+
 	private static void parseDeltaTimeOption(CommandLine line) throws ParseException {
 		String dt = line.getOptionValue("dt", _dtimeDefaultValue.toString());
 		try {
@@ -308,8 +327,14 @@ public class Main {
 		StateComparator cmp = _stateComparatorFactory.createInstance(_stateComparatorInfo);
 		
 		Controller controller = new Controller(sim, _bodyFactory, _forceLawsFactory);
+		
+		if(_axe != null) cs = new CambioSigno(controller, _axe);
+		
+		
 		controller.loadBodies(inStream);
 		controller.run(_steps, outStream, expStream, cmp);
+		
+		if(_axe != null) cs.printHistory();
 	}
 	
 	private static void startGUIMode() throws IOException {
