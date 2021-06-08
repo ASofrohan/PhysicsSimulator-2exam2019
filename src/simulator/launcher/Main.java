@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import simulator.control.Controller;
 import simulator.control.StateComparator;
+import simulator.factories.AtrapadoBodyBuilder;
 import simulator.factories.BasicBodyBuilder;
 import simulator.factories.Builder;
 import simulator.factories.BuilderBasedFactory;
@@ -32,6 +33,7 @@ import simulator.factories.MassLosingBodyBuilder;
 import simulator.factories.MovingTowardsFixedPointBuilder;
 import simulator.factories.NewtonUniversalGravitationBuilder;
 import simulator.factories.NoForceBuilder;
+import simulator.model.Atrapado;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
@@ -69,6 +71,7 @@ public class Main {
 		ArrayList<Builder<Body>> bodyBuilders = new ArrayList<Builder<Body>>();
 		bodyBuilders.add(new BasicBodyBuilder());
 		bodyBuilders.add(new MassLosingBodyBuilder());
+		bodyBuilders.add(new AtrapadoBodyBuilder());
 		_bodyFactory = new BuilderBasedFactory<Body>(bodyBuilders);
 		// TODO initialize the force laws factory
 		ArrayList<Builder<ForceLaws>> forceBuilders = new ArrayList<Builder<ForceLaws>>();
@@ -170,7 +173,7 @@ public class Main {
 				.build());
 		
 		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").hasArg()
-				.desc("Execution Mode. Possible values: ’batch’(Batch mode), ’gui’ (Graphical UserInterface mode). Default value: ’batch’.").build());
+				.desc("Execution Mode. Possible values: ï¿½batchï¿½(Batch mode), ï¿½guiï¿½ (Graphical UserInterface mode). Default value: ï¿½batchï¿½.").build());
 
 		return cmdLineOptions;
 	}
