@@ -56,7 +56,7 @@ public class CambioSigno implements SimulatorObserver{
 	public void onAdvance(List<Body> bodies, double time) {
 		if(_axe == 0) {
 			for(int i = 0; i < bodies.size(); i++) {
-				if(posicionesAntiguas.get(i).getX() >= 0 && bodies.get(i).getPosition().getX() < 0 || posicionesAntiguas.get(i).getX() < 0 && bodies.get(i).getPosition().getX() >= 0) {
+				if((posicionesAntiguas.get(i).getX() >= 0 && bodies.get(i).getPosition().getX() < 0) || (posicionesAntiguas.get(i).getX() < 0 && bodies.get(i).getPosition().getX() >= 0)) {
 					mapaCuerpos.put(bodies.get(i).getId(), mapaCuerpos.get(bodies.get(i).getId())+1);
 				}
 				posicionesAntiguas.set(i, bodies.get(i).getPosition());
