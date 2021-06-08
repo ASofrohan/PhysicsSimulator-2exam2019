@@ -9,7 +9,7 @@ import simulator.model.Body;
 
 public class AtrapadoBodyBuilder extends Builder<Body>{
 	public AtrapadoBodyBuilder() {
-		super("ab", "Atrapado Builder");
+		super("atrapado", "Atrapado Builder");
 	}
 	
 	@Override
