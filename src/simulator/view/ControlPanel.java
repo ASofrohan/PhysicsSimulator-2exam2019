@@ -119,7 +119,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
             	_ctrl.bang((int)bangSpinner.getValue());
             }
         });
-		stop.setToolTipText("End simulation");
+		bang.setToolTipText("End simulation");
 		
 		toolBar.add(new JLabel("Steps:"));
 		SpinnerNumberModel sm= new SpinnerNumberModel(1,1,99999,100);
