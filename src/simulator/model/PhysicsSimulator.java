@@ -53,6 +53,7 @@ public class PhysicsSimulator {
 			double newMass = bs.get(i).getMass()*(100.0-x)/100.0;
 			bs.get(i).setMass(newMass);
 		}
+		onBang();
 	}
 	
 	public JSONObject getState() {
