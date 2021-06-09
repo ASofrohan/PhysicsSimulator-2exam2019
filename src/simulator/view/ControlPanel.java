@@ -38,6 +38,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	private JButton play;
 	private JButton exit;
 	private JButton stop;
+	private JButton bang;
+	private JSpinner bangSpinner;
 	private JSpinner steps;
 	private TextField deltaTime;
 	private ChangeForceClassDialog dialogoF;
@@ -109,6 +111,15 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
         });
 		stop.setToolTipText("End simulation");
 		
+		this.bang = new JButton();
+		toolBar.add(bang);
+		stop.setIcon(new ImageIcon("resources\\icons\\stop.png"));
+		stop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	_ctrl.bang((int)bangSpinner.getValue());
+            }
+        });
+		stop.setToolTipText("End simulation");
 		
 		toolBar.add(new JLabel("Steps:"));
 		SpinnerNumberModel sm= new SpinnerNumberModel(1,1,99999,100);
@@ -118,6 +129,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 		toolBar.add(new JLabel("Delta-time:"));
 		deltaTime = new TextField("10");
 		toolBar.add(deltaTime);
+		
+		toolBar.add(new JLabel("Bang:"));
+		SpinnerNumberModel snm= new SpinnerNumberModel(1,1,100,10);
+		bangSpinner = new JSpinner(snm);
+		toolBar.add(bangSpinner);
 		
 		toolBar.add(Box.createGlue());
 
@@ -177,6 +193,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 		this.play.setEnabled(enable);
 		this.steps.setEnabled(enable);
 		this.deltaTime.setEnabled(enable);
+		this.bang.setEnabled(enable);
+		this.bangSpinner.setEnabled(enable);
 		
 	}
 	

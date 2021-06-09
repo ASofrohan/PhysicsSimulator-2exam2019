@@ -76,6 +76,9 @@ public class Controller {
 		
 	}
 	
+	public void bang(int x) {
+		sim.bang(x);
+	}
 	
 	public void loadBodies(InputStream in) {
 		JSONObject jsonInput = new JSONObject(new JSONTokener(in));

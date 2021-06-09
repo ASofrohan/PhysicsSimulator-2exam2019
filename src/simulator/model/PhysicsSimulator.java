@@ -48,6 +48,13 @@ public class PhysicsSimulator {
 		
 	}
 	
+	public void bang(int x) {
+		for(int i = 0; i < bs.size(); i++) {
+			double newMass = bs.get(i).getMass()*(100.0-x)/100.0;
+			bs.get(i).setMass(newMass);
+		}
+	}
+	
 	public JSONObject getState() {
 		JSONObject state = new JSONObject();
 		JSONArray bodies = new JSONArray();
