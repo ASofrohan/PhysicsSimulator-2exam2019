@@ -99,4 +99,11 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 		fireTableDataChanged();
 	}
 
+	@Override
+	public void onBang(List<Body> bodies) {
+		// TODO Auto-generated method stub
+		_bodies = bodies;
+		fireTableDataChanged();
+	}
+
 }

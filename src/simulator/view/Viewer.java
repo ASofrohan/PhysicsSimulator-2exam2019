@@ -263,4 +263,10 @@ public class Viewer extends JComponent implements SimulatorObserver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onBang(List<Body> bodies) {
+		// TODO Auto-generated method stub
+		
+	}
 		}

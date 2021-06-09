@@ -9,4 +9,5 @@ public interface SimulatorObserver {
  public void onAdvance(List<Body> bodies, double time);
  public void onDeltaTimeChanged(double dt);
  public void onForceLawsChanged(String fLawsDesc);
+ public void onBang(List<Body> bodies);
 }

@@ -99,6 +99,13 @@ public class PhysicsSimulator {
 			o.onReset(bs, currentT, dt, forceLaw.toString());
 		}
 	}
+	
+	public void onBang() {
+		 for(SimulatorObserver o: so) {
+				o.onBang(bs);
+			}
+	}
+	
 	public void setDeltaTime(double dt) {
 	 if(dt<=0) throw new IllegalArgumentException("Set delta time exception");
 	 this.dt = dt;
