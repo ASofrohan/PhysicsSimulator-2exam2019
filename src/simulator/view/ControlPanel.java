@@ -113,8 +113,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 		
 		this.bang = new JButton();
 		toolBar.add(bang);
-		stop.setIcon(new ImageIcon("resources\\icons\\stop.png"));
-		stop.addActionListener(new ActionListener() {
+		bang.setIcon(new ImageIcon("resources\\icons\\run.png"));
+		bang.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	_ctrl.bang((int)bangSpinner.getValue());
             }
@@ -248,5 +248,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onBang(List<Body> bodies) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

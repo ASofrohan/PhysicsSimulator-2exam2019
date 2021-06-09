@@ -180,4 +180,11 @@ public class CambioSigno implements SimulatorObserver {
 	}
 
 
+	@Override
+	public void onBang(List<Body> bodies) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
